@@ -74,5 +74,5 @@ JSWs-MacBook-Pro-3:log_digestion shashikanth$ node javaScriptImpl.js
 
 ```
 
-
-<img width="1800" alt="image" src="https://github.com/Mshashikanth1/log_digestion/assets/57630057/ad1c3f75-b6cb-4696-9e61-72d8f1fac793">
+<img width="1800" alt="image" src="https://github.com/Mshashikanth1/log_digestion/assets/57630057/e9a9ee12-320e-4ad5-b920-df95905a08f2">
+Screenshot 2023-07-31 at 1.00.32 PM
