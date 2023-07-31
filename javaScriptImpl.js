@@ -1,66 +1,41 @@
-const fs = require("fs").promises;
+const fs = require('fs');
+const httpStatus = require('http-status-codes');
 
-const readLogFile = async () => {
-    //this should be the path of you log
-
-    const logFilePath = "/Users/shashikanth/log_digestion/api-dev-out.log";
-    try {
-        const logFile = await fs.readFile(logFilePath, "utf8");
-        return logFile;
-    } catch (error) {
-        console.error('Error reading file:', error.message);
-        return null;
-    }
-};
-
-const getPerMinuteData = (data) => {
-    const perMinuteData = {};
-    const lines = data.split("\n");
-    for (const line of lines) {
-        const [timestamp, statusCode, endpoint] = line.split(" ");
-        if (timestamp && statusCode && endpoint) {
-            const minute = timestamp.substring(11, 13);
-            if (!perMinuteData[minute]) {
-                perMinuteData[minute] = {
-                    statusCodes: [],
-                };
-            }
-            perMinuteData[minute].statusCodes.push(statusCode);
-        }
-    }
-    return perMinuteData;
-};
-
-const getStatusCodeCounts = (perMinuteData) => {
-    const statusCodeCounts = {};
-    for (const minute in perMinuteData) {
-        const statusCodes = perMinuteData[minute].statusCodes;
-        for (const statusCode of statusCodes) {
-            if (!statusCodeCounts[statusCode]) {
-                statusCodeCounts[statusCode] = 0;
-            }
-            statusCodeCounts[statusCode]++;
-        }
-    }
-    return statusCodeCounts;
-};
-
-const main = async () => {
-    const logFile = await readLogFile();
-    if (!logFile) {
+// Read the log file asynchronously
+fs.readFile("/Users/shashikanth/log_digestion/api-dev-out.log", 'utf8', (err, data) => {
+    if (err) {
+        console.error('Error reading the log file:', err);
         return;
     }
 
-    const perMinuteData = getPerMinuteData(logFile);
-    const statusCodeCounts = getStatusCodeCounts(perMinuteData);
+    // Process the logs and count status codes
+    const logs = data.split('\n');
+    const statusCounts = {};
 
-    // Convert the statusCodeCounts object to an array of objects for console.table
-    const table = Object.entries(statusCodeCounts).map(([statusCode, count]) => ({
-        statusCode: statusCode,
-        count: count,
+    logs.forEach(log => {
+        const statusCodeMatches = log.match(/^.*HTTP\/\d\.\d"\s+(\d{3})\b/);
+        if (statusCodeMatches) {
+            statusCodeMatches.forEach(match => {
+                const statusCode = parseInt(match);
+                try {
+                    // Check if the status code exists in the httpStatus library
+                    if (httpStatus.getReasonPhrase(statusCode)) {
+                        statusCounts[statusCode] = statusCounts[statusCode] ? statusCounts[statusCode] + 1 : 1;
+                    }
+                } catch (error) {
+                    // Handle the error for non-standard status codes
+                    console.error(`Error: Status code does not exist: ${statusCode}`);
+                }
+            });
+        }
+    });
+
+    // Prepare the output table with correct index messages
+    const outputTable = Object.entries(statusCounts).map(([statusCode, count]) => ({
+        index: httpStatus.getReasonPhrase(parseInt(statusCode)),
+        statusCode: parseInt(statusCode),
+        count,
     }));
 
-    console.table(table);
-};
-
-main();
+    console.table(outputTable);
+});
