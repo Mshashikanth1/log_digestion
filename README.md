@@ -7,38 +7,44 @@ i mean the number of times the status count is present in the entire log
 # JAVA SCRIPT IMPLEMENTATION
 
 for the java script the dependencies are :
-`
+```
 npm init
 npm install axios cli-table3
-npm install @types/axios --save-dev`
+npm install @types/axios --save-dev
+```
 
 
-for running the app:`
-node javaScriptImpl.js`
+for running the app:
+```
+node javaScriptImpl.js
+```
 
 
 
 # TYPE SCRIPT IMPLEMENTATION
 
 for type script dependencies are:
-`
+```
 npm init -y
 npm install typescript ts-node @types/node`
-
+```
 for running the app:
-`
+```
 npx ts-node typeScriptImpl.ts
-`
+```
 
 
 #sample output
 JSWs-MacBook-Pro-3:log_digestion shashikanth$ node javaScriptImpl.js
 
-1. ┌──────────────┬────────────┬───────┐
-2. │   (index)    │ statusCode │ count │
-3. ├──────────────┼────────────┼───────┤
-4. │ Server Error │    500     │  23   │
-5. │  Not found   │    404     │  23   │
-6. │      OK      │    200     │ 1256  │
-7. │ Not changed  │    304     │  50   │
-8. └──────────────┴────────────┴───────┘    
+
+```
+┌──────────────┬────────────┬───────┐
+│   (index)    │ statusCode │ count │
+├──────────────┼────────────┼───────┤
+│ Server Error │    500     │  23   │
+│  Not found   │    404     │  23   │
+│      OK      │    200     │ 1256  │
+│ Not changed  │    304     │  50   │
+└──────────────┴────────────┴───────┘                    
+```
