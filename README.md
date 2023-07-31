@@ -1,4 +1,4 @@
-<img width="1800" alt="image" src="https://github.com/Mshashikanth1/log_digestion/assets/57630057/8349d57a-5340-489c-b33c-536057c1a944"># THIS IS A SIMPLE TASK FOR LOG DIGESSION
+<img width="1800" alt="image" src="https://github.com/Mshashikanth1/log_digestion/assets/57630057/ad1c3f75-b6cb-4696-9e61-72d8f1fac793"><img width="1800" alt="image" src="https://github.com/Mshashikanth1/log_digestion/assets/57630057/8349d57a-5340-489c-b33c-536057c1a944"># THIS IS A SIMPLE TASK FOR LOG DIGESSION
 this is a simple task i have it involves in reading the log and preparing  a nice table of status code and their count in the log
 i mean the number of times the status count is present in the entire log
 
@@ -73,5 +73,3 @@ JSWs-MacBook-Pro-3:log_digestion shashikanth$ node javaScriptImpl.js
 └─────────┴───────────────────────────────────┴────────────┴────────┘
 
 ```
-
-Screenshot 2023-07-31 at 12.36.55 PM
